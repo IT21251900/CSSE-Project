@@ -10,6 +10,7 @@ const validationSchema = Yup.object().shape({
   address: Yup.string().required('Address is required'),
   phone: Yup.string()
     .matches(/^[0-9]+$/, 'Phone must be a number')
+    .min(10, 'Phone must be at least 10 digits')
     .required('Phone is required'),
 });
 
