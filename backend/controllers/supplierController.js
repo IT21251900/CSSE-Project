@@ -70,9 +70,24 @@ const editSupplier = async (req, res) => {
 	}
 };
 
+const deleteSupplier = async (req, res) => {
+	try {
+		const supplier = await Supplier.findById(req.params.id);
+		console.log(supplier);
+		if (!supplier) {
+			return res.status(404).json({ error: 'Supplier not found' });
+		}
+		await supplier.deleteOne();
+		res.status(200).json({ message: 'Supplier deleted successfully' });
+	} catch (error) {
+		res.status(500).json({ error: 'An error occurred while deleting the supplier' });
+	}
+};
+
 module.exports = {
 	createSupplier,
 	allSuppliers,
 	singleSupplier,
 	editSupplier,
+	deleteSupplier,
 };

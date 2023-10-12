@@ -1,9 +1,8 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Loader from './common/Loader';
-import AllSupplier from './pages/supplier/AllSupplier';
 import routes from './routes';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
@@ -19,14 +18,11 @@ function App() {
     <Loader />
   ) : (
     <>
-      <Toaster
-        position="top-right"
-        reverseOrder={false}
-        containerClassName="overflow-auto"
-      />
+      <Toaster position="top-center" reverseOrder={false} />
+
       <Routes>
         <Route element={<DefaultLayout />}>
-          <Route index element={<AllSupplier />} />
+          <Route index element={<Navigate replace to="/supplier/all" />} />
           {routes.map((routes, index) => {
             const { path, component: Component } = routes;
             return (

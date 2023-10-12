@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 import Breadcrumb from '../../components/Breadcrumb';
 
@@ -44,9 +45,11 @@ const CreateSupplier = () => {
       } else {
         setError(null);
         formik.resetForm();
+        toast.success('Supplier created successfully');
       }
     } catch (error: any) {
       setError(error.response.data.error);
+      toast.error(error.response.data.error);
     }
   };
 

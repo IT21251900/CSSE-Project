@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 type SupplierResponseType = {
   _id: string;
@@ -35,6 +37,41 @@ const SupplierTable = () => {
 
   const onEdit = (id: string) => {
     navigate(`/supplier/edit/${id}`);
+  };
+
+  const onDelete = (id: string) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this supplier!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.delete(`/api/supplier/${id}`);
+          if (response.status === 200) {
+            setSuppliers((prevSuppliers) =>
+              prevSuppliers.filter((supplier) => supplier._id !== id),
+            );
+            toast.success('Supplier deleted successfully');
+          } else {
+            Swal.fire(
+              'Error',
+              'An error occurred while deleting the supplier.',
+              'error',
+            );
+          }
+        } catch (error: any) {
+          Swal.fire(
+            'Error',
+            'An error occurred while deleting the supplier.',
+            'error',
+          );
+        }
+      }
+    });
   };
 
   if (error) {
@@ -110,7 +147,12 @@ const SupplierTable = () => {
                         />
                       </svg>
                     </button>
-                    <button className="hover:text-primary">
+                    <button
+                      onClick={() => {
+                        onDelete(supplier._id);
+                      }}
+                      className="hover:text-primary"
+                    >
                       <svg
                         className="fill-current"
                         width="18"

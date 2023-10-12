@@ -105,7 +105,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Forms --> */}
               <SidebarLinkGroup
                 activeCondition={
-                  pathname === '/seller' || pathname.includes('seller')
+                  pathname === '/supplier' || pathname.includes('supplier')
                 }
               >
                 {(handleClick, open) => {

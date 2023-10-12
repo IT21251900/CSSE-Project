@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom'; // Assuming you're using react-router for routing
+import toast from 'react-hot-toast';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import * as Yup from 'yup';
 import Breadcrumb from '../../components/Breadcrumb';
 import { SupplierType } from './CreateSupplier';
@@ -58,10 +60,13 @@ const EditSupplier = () => {
         setError(null);
         formik.resetForm();
         navigate('/supplier/all');
+
+        toast.success('Supplier Updated Successfully');
       }
     } catch (error: any) {
       console.error('Error updating supplier:', error);
       setError(error.response.data.error);
+      toast.error(error.response.data.error);
     }
   };
 
