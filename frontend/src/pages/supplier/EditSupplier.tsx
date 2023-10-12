@@ -99,10 +99,10 @@ const EditSupplier = () => {
                   <input
                     type="text"
                     placeholder="Enter full name"
-                    className={`w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary ${
+                    className={`w-full rounded border-[1.5px]  bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary ${
                       formik.touched.name && formik.errors.name
-                        ? 'border-red-500'
-                        : ''
+                        ? 'border-danger'
+                        : 'border-stroke'
                     }`}
                     id="name"
                     name="name"
@@ -124,10 +124,10 @@ const EditSupplier = () => {
                   <input
                     type="email"
                     placeholder="Enter email address"
-                    className={`w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary ${
+                    className={`w-full rounded border-[1.5px]  bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary ${
                       formik.touched.email && formik.errors.email
-                        ? 'border-red-500'
-                        : ''
+                        ? 'border-danger'
+                        : 'border-stroke'
                     }`}
                     id="email"
                     name="email"
@@ -149,10 +149,10 @@ const EditSupplier = () => {
                   <input
                     type="text"
                     placeholder="Enter Address"
-                    className={`w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary ${
+                    className={`w-full rounded border-[1.5px]  bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary ${
                       formik.touched.address && formik.errors.address
-                        ? 'border-red-500'
-                        : ''
+                        ? 'border-danger'
+                        : 'border-stroke'
                     }`}
                     id="address"
                     name="address"
@@ -173,10 +173,10 @@ const EditSupplier = () => {
                   </label>
                   <input
                     placeholder="Enter Phone Number"
-                    className={`w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary ${
+                    className={`w-full rounded border-[1.5px]  bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary ${
                       formik.touched.phone && formik.errors.phone
-                        ? 'border-red-500'
-                        : ''
+                        ? 'border-danger'
+                        : 'border-stroke'
                     }`}
                     id="phone"
                     name="phone"
