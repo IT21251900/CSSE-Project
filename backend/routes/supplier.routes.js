@@ -1,8 +1,8 @@
 const express = require('express');
+const { createSupplier } = require('../controllers/supplierController');
+
 const router = express.Router();
 
-router.get('/', (req, res) => {
-	res.send('Welcome to the API!');
-});
+router.post('/create', createSupplier);
 
 module.exports = router;

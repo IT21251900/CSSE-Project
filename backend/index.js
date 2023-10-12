@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 connectDB();
 
 app.use(bodyParser.json());
-app.use('/api/supplier', supplierRoutes);
+app.use('/supplier', supplierRoutes);
 
 app.listen(port, () => {
 	console.log(`Server is running on port ${port}`);
