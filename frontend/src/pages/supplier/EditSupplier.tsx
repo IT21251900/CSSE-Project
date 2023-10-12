@@ -59,9 +59,9 @@ const EditSupplier = () => {
         formik.resetForm();
         navigate('/supplier/all');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error updating supplier:', error);
-      setError('An error occurred while updating the supplier.');
+      setError(error.response.data.error);
     }
   };
 
