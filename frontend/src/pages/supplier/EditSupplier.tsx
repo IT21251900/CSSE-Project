@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom'; // Assuming you're using react-router for routing
 import * as Yup from 'yup';
 import Breadcrumb from '../../components/Breadcrumb';
+import { SupplierType } from './CreateSupplier';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -14,22 +16,33 @@ const validationSchema = Yup.object().shape({
     .required('Phone is required'),
 });
 
-export type SupplierType = {
-  name: string;
-  email: string;
-  address: string;
-  phone: string;
-};
-
-const CreateSupplier = () => {
+const EditSupplier = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
+  const [supplier, setSupplier] = useState<SupplierType | null>(null);
+
+  useEffect(() => {
+    const fetchSupplier = async () => {
+      try {
+        const response = await axios.get(`/api/supplier/${id}`);
+        setSupplier(response.data.supplier);
+      } catch (error) {
+        console.error('Error fetching supplier:', error);
+      }
+    };
+
+    fetchSupplier();
+  }, [id]);
+
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      address: '',
-      phone: '',
+      name: supplier?.name ?? '',
+      email: supplier?.email ?? '',
+      address: supplier?.address ?? '',
+      phone: supplier?.phone ?? '',
     },
+    enableReinitialize: true,
     validationSchema,
     onSubmit: (values) => {
       handleSubmit(values);
@@ -38,21 +51,27 @@ const CreateSupplier = () => {
 
   const handleSubmit = async (values: SupplierType) => {
     try {
-      const response = await axios.post('/api/supplier', values);
-      if (response.status !== 201) {
+      const response = await axios.put(`/api/supplier/${id}`, values);
+      if (response.status !== 200) {
         setError(response.data.error);
       } else {
         setError(null);
         formik.resetForm();
+        navigate('/supplier/all');
       }
-    } catch (error: any) {
-      setError(error.response.data.error);
+    } catch (error) {
+      console.error('Error updating supplier:', error);
+      setError('An error occurred while updating the supplier.');
     }
   };
 
+  if (!supplier) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
-      <Breadcrumb pageName="Create Supplier" />
+      <Breadcrumb pageName="Edit Supplier" />
 
       <div className="grid grid-cols-1 gap-9 sm:grid-cols-1">
         <div className="flex flex-col gap-9">
@@ -60,7 +79,7 @@ const CreateSupplier = () => {
           <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
             <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
               <h3 className="font-medium text-black dark:text-white">
-                Create Supplier Form
+                Edit Supplier Form
               </h3>
             </div>
             <form onSubmit={formik.handleSubmit}>
@@ -87,7 +106,9 @@ const CreateSupplier = () => {
                     value={formik.values.name}
                   />
                   {formik.touched.name && formik.errors.name ? (
-                    <div className="text-danger">{formik.errors.name}</div>
+                    <div className="text-danger">
+                      {formik.errors.name.toString()}
+                    </div>
                   ) : null}
                 </div>
 
@@ -110,7 +131,9 @@ const CreateSupplier = () => {
                     value={formik.values.email}
                   />
                   {formik.touched.email && formik.errors.email ? (
-                    <div className="text-danger">{formik.errors.email}</div>
+                    <div className="text-danger">
+                      {formik.errors.email.toString()}
+                    </div>
                   ) : null}
                 </div>
 
@@ -133,7 +156,9 @@ const CreateSupplier = () => {
                     value={formik.values.address}
                   />
                   {formik.touched.address && formik.errors.address ? (
-                    <div className="text-danger">{formik.errors.address}</div>
+                    <div className="text-danger">
+                      {formik.errors.address.toString()}
+                    </div>
                   ) : null}
                 </div>
 
@@ -155,7 +180,9 @@ const CreateSupplier = () => {
                     value={formik.values.phone}
                   />
                   {formik.touched.phone && formik.errors.phone ? (
-                    <div className="text-danger">{formik.errors.phone}</div>
+                    <div className="text-danger">
+                      {formik.errors.phone.toString()}
+                    </div>
                   ) : null}
                 </div>
 
@@ -163,7 +190,7 @@ const CreateSupplier = () => {
                   type="submit"
                   className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
                 >
-                  Create Supplier
+                  Update Supplier
                 </button>
               </div>
             </form>
@@ -174,4 +201,4 @@ const CreateSupplier = () => {
   );
 };
 
-export default CreateSupplier;
+export default EditSupplier;
