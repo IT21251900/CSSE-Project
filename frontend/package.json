@@ -1,5 +1,5 @@
 {
-  "name": "tailadmin-react-free",
+  "name": "csse",
   "private": true,
   "version": "1.0.5",
   "type": "module",
@@ -9,9 +9,7 @@
     "preview": "vite preview"
   },
   "author": {
-    "name": "TailAdmin",
-    "email": "hello@tailadmin.com",
-    "url": "https://tailadmin.com"
+    "name": "CSSE"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
