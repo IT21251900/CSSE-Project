@@ -11,10 +11,6 @@ const validationSchema = Yup.object().shape({
   phone: Yup.string()
     .matches(/^[0-9]+$/, 'Phone must be a number')
     .required('Phone is required'),
-  password: Yup.string().required('Password is required'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Passwords must match')
-    .required('Password confirmation is required'),
 });
 
 type FormValues = {
@@ -22,8 +18,6 @@ type FormValues = {
   email: string;
   address: string;
   phone: string;
-  password: string;
-  confirmPassword: string;
 };
 
 const CreateSupplier = () => {
@@ -34,8 +28,6 @@ const CreateSupplier = () => {
       email: '',
       address: '',
       phone: '',
-      password: '',
-      confirmPassword: '',
     },
     validationSchema,
     onSubmit: (values) => {
@@ -46,13 +38,11 @@ const CreateSupplier = () => {
   const handleSubmit = async (values: FormValues) => {
     try {
       const response = await axios.post('/api/supplier/create', values);
-      console.log(response);
       if (response.status !== 201) {
         setError(response.data.error);
       } else {
         setError(null);
         formik.resetForm();
-        console.log('Supplier created:', response.data.message);
       }
     } catch (error: any) {
       setError(error.response.data.error);
@@ -165,51 +155,6 @@ const CreateSupplier = () => {
                   />
                   {formik.touched.phone && formik.errors.phone ? (
                     <div className="text-danger">{formik.errors.phone}</div>
-                  ) : null}
-                </div>
-
-                <div className="mb-4.5">
-                  <label className="mb-2.5 block text-black dark:text-white">
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Enter password"
-                    className={`w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary ${
-                      formik.touched.password && formik.errors.password
-                        ? 'border-red-500'
-                        : ''
-                    }`}
-                    id="password"
-                    name="password"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.password}
-                  />
-                  {formik.touched.password && formik.errors.password ? (
-                    <div className="text-danger">{formik.errors.password}</div>
-                  ) : null}
-                </div>
-
-                <div className="mb-5.5">
-                  <label className="mb-2.5 block text-black dark:text-white">
-                    Re-type Password
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Re-enter password"
-                    className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.confirmPassword}
-                  />
-                  {formik.touched.confirmPassword &&
-                  formik.errors.confirmPassword ? (
-                    <div className="text-danger">
-                      {formik.errors.confirmPassword}
-                    </div>
                   ) : null}
                 </div>
 
