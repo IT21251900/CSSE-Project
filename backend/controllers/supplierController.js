@@ -23,6 +23,16 @@ const createSupplier = async (req, res) => {
 	}
 };
 
+const allSuppliers = async (req, res) => {
+	try {
+		const suppliers = await Supplier.find();
+		res.status(200).json({ suppliers });
+	} catch (error) {
+		res.status(500).json({ error: 'An error occurred while fetching the suppliers' });
+	}
+};
+
 module.exports = {
 	createSupplier,
+	allSuppliers,
 };

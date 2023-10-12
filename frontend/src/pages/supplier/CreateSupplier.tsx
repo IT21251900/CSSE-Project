@@ -14,7 +14,7 @@ const validationSchema = Yup.object().shape({
     .required('Phone is required'),
 });
 
-type FormValues = {
+type SupplierType = {
   name: string;
   email: string;
   address: string;
@@ -36,7 +36,7 @@ const CreateSupplier = () => {
     },
   });
 
-  const handleSubmit = async (values: FormValues) => {
+  const handleSubmit = async (values: SupplierType) => {
     try {
       const response = await axios.post('/api/supplier/create', values);
       if (response.status !== 201) {
