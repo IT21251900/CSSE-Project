@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 // Use the routes for each collection with appropriate base paths
 app.use('/supplier', supplierRoutes);
 app.use('/orders', orderRoutes);
-app.use('/procurement-officers', procurementOfficerRoutes);
+app.use('/procurement-officer', procurementOfficerRoutes);
 app.use('/request-orders', requestOrderRoutes);
 
 app.listen(port, () => {

@@ -43,6 +43,8 @@ const EditSupplier = () => {
       email: supplier?.email ?? '',
       address: supplier?.address ?? '',
       phone: supplier?.phone ?? '',
+      password: '',
+      confirmPassword: '',
     },
     enableReinitialize: true,
     validationSchema,
