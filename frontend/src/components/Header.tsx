@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import Logo from '../images/logo/logo-icon.svg';
 import DarkModeSwitcher from './DarkModeSwitcher';
 import DropdownUser from './DropdownUser';
 
@@ -55,7 +54,9 @@ const Header = (props: {
           {/* <!-- Hamburger Toggle BTN --> */}
 
           <Link className="block flex-shrink-0 lg:hidden" to="/">
-            <img src={Logo} alt="Logo" />
+            <span className="text-2xl font-semibold text-black dark:text-white">
+              Build<span className="text-warning">Zone</span>
+            </span>
           </Link>
         </div>
 
