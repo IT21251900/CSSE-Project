@@ -13,6 +13,10 @@ const validationSchema = Yup.object().shape({
     .matches(/^[0-9]+$/, 'Phone must be a number')
     .min(10, 'Phone must be at least 10 digits')
     .required('Phone is required'),
+  password: Yup.string().required('Password is required').min(6),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password')], 'Passwords must match')
+    .required('Password confirmation is required'),
 });
 
 export type SupplierType = {
@@ -20,6 +24,8 @@ export type SupplierType = {
   email: string;
   address: string;
   phone: string;
+  password: string;
+  confirmPassword: string;
 };
 
 const CreateSupplier = () => {
@@ -30,6 +36,8 @@ const CreateSupplier = () => {
       email: '',
       address: '',
       phone: '',
+      password: '',
+      confirmPassword: '',
     },
     validationSchema,
     onSubmit: (values) => {
@@ -159,6 +167,56 @@ const CreateSupplier = () => {
                   />
                   {formik.touched.phone && formik.errors.phone ? (
                     <div className="text-danger">{formik.errors.phone}</div>
+                  ) : null}
+                </div>
+
+                <div className="mb-4.5">
+                  <label className="mb-2.5 block text-black dark:text-white">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Enter Password"
+                    className={`w-full rounded border-[1.5px] bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary ${
+                      formik.touched.password && formik.errors.password
+                        ? 'border-danger'
+                        : ' border-stroke'
+                    }`}
+                    id="password"
+                    name="password"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.password}
+                  />
+                  {formik.touched.password && formik.errors.password ? (
+                    <div className="text-danger">{formik.errors.password}</div>
+                  ) : null}
+                </div>
+
+                <div className="mb-4.5">
+                  <label className="mb-2.5 block text-black dark:text-white">
+                    Confirm Password
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    className={`w-full rounded border-[1.5px] bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary ${
+                      formik.touched.confirmPassword &&
+                      formik.errors.confirmPassword
+                        ? 'border-danger'
+                        : ' border-stroke'
+                    }`}
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.confirmPassword}
+                  />
+                  {formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword ? (
+                    <div className="text-danger">
+                      {formik.errors.confirmPassword}
+                    </div>
                   ) : null}
                 </div>
 
