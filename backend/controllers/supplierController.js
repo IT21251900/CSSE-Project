@@ -1,19 +1,29 @@
-const Supplier = require('../models/supplier');
+const Supplier = require('../models/Supplier');
+const bcrypt = require('bcrypt');
 
 const createSupplier = async (req, res) => {
 	try {
-		const { name, email, address, phone } = req.body;
+		const { name, email, address, phone, password } = req.body;
+
+		if (!name || !email || !address || !phone || !password) {
+			return res.status(400).json({ error: 'All fields are required' });
+		}
 
 		const existingSupplier = await Supplier.findOne({ email });
 		if (existingSupplier) {
 			return res.status(400).json({ error: 'Email is already in use' });
 		}
 
+		const hashedPassword = await bcrypt.hash(password, 10);
+
 		const supplier = new Supplier({
 			name,
 			email,
 			address,
 			phone,
+			password: hashedPassword,
+			createdAt: Date.now(),
+			updatedAt: Date.now(),
 		});
 
 		await supplier.save();
@@ -48,6 +58,10 @@ const editSupplier = async (req, res) => {
 	try {
 		const { name, email, address, phone } = req.body;
 
+		if (!name || !email || !address || !phone) {
+			return res.status(400).json({ error: 'All fields are required' });
+		}
+
 		const supplier = await Supplier.findById(req.params.id);
 		if (!supplier) {
 			return res.status(404).json({ error: 'Supplier not found' });
@@ -62,6 +76,7 @@ const editSupplier = async (req, res) => {
 		supplier.email = email;
 		supplier.address = address;
 		supplier.phone = phone;
+		supplier.updatedAt = Date.now();
 
 		await supplier.save();
 		res.status(200).json({ message: 'Supplier updated successfully' });
