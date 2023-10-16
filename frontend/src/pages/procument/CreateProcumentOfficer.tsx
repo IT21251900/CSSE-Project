@@ -8,11 +8,17 @@ import Breadcrumb from '../../components/Breadcrumb';
 const validationSchema = Yup.object().shape({
   procumentOfficerID: Yup.string().required('ID is required'),
   procumentOfficerName: Yup.string().required('Name is required'),
+  password: Yup.string().required('Password is required'),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Confirm Password is required'),
 });
 
 export type ProcurementOfficerType = {
-  procumentOfficerID: String;
-  procumentOfficerName: String;
+  procumentOfficerID: string;
+  procumentOfficerName: string;
+  password: string;
+  confirmPassword: string;
 };
 
 const AddProcurementOfficer = () => {
@@ -21,6 +27,8 @@ const AddProcurementOfficer = () => {
     initialValues: {
       procumentOfficerID: '',
       procumentOfficerName: '',
+      password: '',
+      confirmPassword: '',
     },
     validationSchema,
     onSubmit: (values) => {
@@ -38,9 +46,7 @@ const AddProcurementOfficer = () => {
         formik.resetForm();
         toast.success('Procurement Officer created successfully');
       }
-    } catch (error: any) {
-      setError(error.response.data.error);
-      toast.error(error.response.data.error);
+    } catch (error) { 
     }
   };
 
@@ -108,6 +114,56 @@ const AddProcurementOfficer = () => {
                 formik.errors.procumentOfficerName ? (
                   <div className="text-danger">
                     {formik.errors.procumentOfficerName}
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="mb-4.5">
+                <label className="mb-2.5 block text-black dark:text-white">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  placeholder="Enter Password"
+                  className={`w-full rounded border-[1.5px] bg-transparent py-3 px-5 font-medium outline-none transition focus.border-primary active.border-primary ${
+                    formik.touched.password && formik.errors.password
+                      ? 'border-danger'
+                      : 'border-stroke'
+                  }`}
+                  id="password"
+                  name="password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                />
+                {formik.touched.password && formik.errors.password ? (
+                  <div className="text-danger">{formik.errors.password}</div>
+                ) : null}
+              </div>
+
+              <div className="mb-4.5">
+                <label className="mb-2.5 block text-black dark:text-white">
+                  Confirm Password
+                </label>
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  className={`w-full rounded border-[1.5px] bg-transparent py-3 px-5 font-medium outline-none transition focus.border-primary active.border-primary ${
+                    formik.touched.confirmPassword &&
+                    formik.errors.confirmPassword
+                      ? 'border-danger'
+                      : 'border-stroke'
+                  }`}
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.confirmPassword}
+                />
+                {formik.touched.confirmPassword &&
+                formik.errors.confirmPassword ? (
+                  <div className="text-danger">
+                    {formik.errors.confirmPassword}
                   </div>
                 ) : null}
               </div>
