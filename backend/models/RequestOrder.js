@@ -1,11 +1,21 @@
 const mongoose = require("mongoose");
 
 const requestOrderSchema = new mongoose.Schema({
-  requestOrderID: String,
-  orderID: String,
-  supplierID: String,
-  comments: String,
-  procurementOfficerID: String,
+  requestOrderID: {
+    type: String
+  },
+  orderID: {
+    type: String,
+    required: true,
+  },
+  supplierID: {
+    type: String,
+  },
+  comments: String, // Not required
+  procurementOfficerID: {
+    type: String,
+    required: true,
+  },
   progress: {
     type: String,
     enum: [
@@ -19,6 +29,7 @@ const requestOrderSchema = new mongoose.Schema({
       "delivered",
       "payed",
     ],
+    required: true,
   },
 });
 
