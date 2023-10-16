@@ -1,6 +1,7 @@
 const Supplier = require('../models/Supplier');
 const bcrypt = require('bcrypt');
 
+// create supplier
 const createSupplier = async (req, res) => {
 	try {
 		const { name, email, address, phone, password } = req.body;
@@ -33,6 +34,7 @@ const createSupplier = async (req, res) => {
 	}
 };
 
+// get all suppliers
 const allSuppliers = async (req, res) => {
 	try {
 		const suppliers = await Supplier.find();
@@ -42,6 +44,7 @@ const allSuppliers = async (req, res) => {
 	}
 };
 
+// get single supplier by id
 const singleSupplier = async (req, res) => {
 	try {
 		const supplier = await Supplier.findById(req.params.id);
@@ -54,6 +57,7 @@ const singleSupplier = async (req, res) => {
 	}
 };
 
+// edit supplier
 const editSupplier = async (req, res) => {
 	try {
 		const { name, email, address, phone } = req.body;
@@ -85,6 +89,7 @@ const editSupplier = async (req, res) => {
 	}
 };
 
+// delete supplier
 const deleteSupplier = async (req, res) => {
 	try {
 		const supplier = await Supplier.findById(req.params.id);
