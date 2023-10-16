@@ -1,13 +1,13 @@
 import Breadcrumb from '../../components/Breadcrumb';
-import SupplierTable from '../../components/SupplierTable';
+import OrdersTable from '../../components/OrdersTable';
 
 const AllSupplier = () => {
   return (
     <>
-      <Breadcrumb pageName="All Supplier" />
+      <Breadcrumb pageName="All Accepted Orders" />
 
       <div className="flex flex-col gap-10">
-        <SupplierTable />
+        <OrdersTable />
       </div>
     </>
   );
