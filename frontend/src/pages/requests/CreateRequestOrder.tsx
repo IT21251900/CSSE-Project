@@ -40,7 +40,7 @@ const CreateRequestOrder = () => {
       orderID: orderIDFromURL,
       supplierID: '',
       comments: '',
-      procurementOfficerID: '',
+      procurementOfficerID: '652a281a1ca860ab1258cbe5',
       progress: 'pending', // Set a default progress value here
     },
     validationSchema,
@@ -261,6 +261,7 @@ const CreateRequestOrder = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.procurementOfficerID}
+                    readOnly={true}
                   />
                   {formik.touched.procurementOfficerID &&
                   formik.errors.procurementOfficerID ? (
