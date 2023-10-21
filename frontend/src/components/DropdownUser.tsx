@@ -45,12 +45,12 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
+            Sanjana dinith Rajapaksha
           </span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
-          <img src={UserOne} alt="User" />
+          <img className='rounded-full' src={UserOne} alt="User" />
         </span>
 
         <svg

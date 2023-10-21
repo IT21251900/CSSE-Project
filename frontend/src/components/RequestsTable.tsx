@@ -162,11 +162,11 @@ const SupplierTable = () => {
               <tr>
                 <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <h5 className="font-medium text-black dark:text-white">
-                    OD-0032
+                    OD-0033
                   </h5>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                  <p className="text-black dark:text-white">05-10-2023</p>
+                  <p className="text-black dark:text-white">03-04-2023</p>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                   <p className="text-black dark:text-white">
@@ -174,10 +174,10 @@ const SupplierTable = () => {
                   </p>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                  <p className="text-black dark:text-white">2 000 000</p>
+                  <p className="text-black dark:text-white">1 750 000</p>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                  <p className="text-black dark:text-white">Kelum Sandeepa</p>
+                  <p className="text-black dark:text-white">Sandeepa Soysa</p>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                   <div className="flex items-center space-x-3.5">
@@ -211,22 +211,22 @@ const SupplierTable = () => {
               </tr><tr>
                 <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <h5 className="font-medium text-black dark:text-white">
-                    OD-0032
+                    OD-0034
                   </h5>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                  <p className="text-black dark:text-white">05-10-2023</p>
+                  <p className="text-black dark:text-white">05-09-2023</p>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                   <p className="text-black dark:text-white">
-                  Roofing sheets, Cement, Sand, Bricks 
+                  Cement, Sand, Bricks 
                   </p>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                  <p className="text-black dark:text-white">2 000 000</p>
+                  <p className="text-black dark:text-white">250 000</p>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                  <p className="text-black dark:text-white">Kelum Sandeepa</p>
+                  <p className="text-black dark:text-white">Amal Kavinga</p>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                   <div className="flex items-center space-x-3.5">

@@ -275,7 +275,7 @@ const CreateRequestOrder = () => {
                   type="submit"
                   className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
                 >
-                  Approve Order
+                  Confirm Approve/Reject Order
                 </button>
               </div>
             </form>
